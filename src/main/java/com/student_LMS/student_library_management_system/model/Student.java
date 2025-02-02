@@ -102,4 +102,7 @@ public class Student {
     public void setDob(String dob) {
         this.dob = dob;
     }
+
+    public void setCard(Card card) {
+    }
 }

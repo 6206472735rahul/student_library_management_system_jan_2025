@@ -73,4 +73,7 @@ public class Card {
     public void setCardStatus(CardStatus cardStatus) {
         this.cardStatus = cardStatus;
     }
+
+    public void setStudent(Student student) {
+    }
 }
