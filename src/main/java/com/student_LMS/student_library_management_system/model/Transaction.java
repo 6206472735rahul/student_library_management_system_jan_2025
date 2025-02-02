@@ -22,4 +22,19 @@ public class Transaction {
     private String dueDate;
     @Column(name = "fine",nullable = false)
     private double fine;
+
+    // made relation b/w Transaction and book
+    // for transaction  @ManyToOne
+    @ManyToOne
+    @JoinColumn
+    private Book book;
+    // made relation b/w Transaction and Card
+    // for transaction  @ManyToOne
+    @ManyToOne
+    @JoinColumn
+    private Card card;
+
+
+
+
 }

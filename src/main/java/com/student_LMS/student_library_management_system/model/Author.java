@@ -2,6 +2,9 @@ package com.student_LMS.student_library_management_system.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "author")
 public class Author {
@@ -19,6 +22,11 @@ public class Author {
     private String gender;
     @Column(name = "rating",nullable = false)
     private double rating;
+    //made relation b/w Author and book
+    // for Author relation is @OneTOMany
+    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
+     private List<Book>BookbyAuthor= new ArrayList<>();
+
 
     public int getId() {
         return id;

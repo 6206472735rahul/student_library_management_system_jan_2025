@@ -32,7 +32,12 @@ public class Student {
 
     @Column(name = "dob", nullable = false)
     private String dob;
-
+ //made relation b/w student and card (@OneToOne)
+    @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
+    // mappedBy means link create b/w student and card
+    //cascade means :- if you try to delete from student table then also
+    //automatically deleted from card table because of OneToOne relation
+    private Card card;
 
     public int getId() {
         return id;

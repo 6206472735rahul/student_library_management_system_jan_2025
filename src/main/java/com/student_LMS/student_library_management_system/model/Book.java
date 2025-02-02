@@ -3,6 +3,9 @@ package com.student_LMS.student_library_management_system.model;
 import com.student_LMS.student_library_management_system.Enum.Category;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "book")
 public class Book {
@@ -25,6 +28,20 @@ public class Book {
     private boolean availability;
     @Column(name = "rank_no",nullable = false)
     private String rackNo;
+    //made relation b/w Book and Author
+    // for book relation is @ManyToOne
+    @ManyToOne
+    @JoinColumn
+    private Author author;
+
+    //made relation b/w Book and Card @ManyToOne
+    @ManyToOne
+    @JoinColumn
+    private Card card;
+
+    //made relation b/w Book and transaction @OneToMany
+    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
+    private List<Transaction>transactionList= new ArrayList<>();
 
     public int getId() {
         return id;
