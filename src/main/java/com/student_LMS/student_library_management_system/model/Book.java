@@ -1,5 +1,7 @@
 package com.student_LMS.student_library_management_system.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.student_LMS.student_library_management_system.Enum.Category;
 import jakarta.persistence.*;
 
@@ -144,17 +146,17 @@ public class Book {
     @Column(name="rack_no", nullable = false)
     private String rackNo;
 
-    //@JsonBackReference
+    @JsonBackReference
     @ManyToOne
     @JoinColumn
     private Author author;
 
-    //@JsonBackReference
+    @JsonBackReference
     @ManyToOne
     @JoinColumn
     private Card card;
 
-    //@JsonManagedReference
+    @JsonManagedReference
     @OneToMany(mappedBy ="book",cascade = CascadeType.ALL)
     private List<Transaction> transactionList =new ArrayList<>();
 

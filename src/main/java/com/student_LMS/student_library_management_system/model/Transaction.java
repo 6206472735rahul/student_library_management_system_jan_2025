@@ -91,6 +91,7 @@ package com.student_LMS.student_library_management_system.model;
 //    }
 //}
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.student_LMS.student_library_management_system.Enum.TransactionType;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -120,12 +121,13 @@ public class Transaction {
     @Column(name = "fine",nullable = false)
     private double fine;
 
-   // @JsonBackReference
+    @JsonBackReference // it's telling me we have already managed looping
+    // that's don't print similar data again and again
     @ManyToOne
     @JoinColumn
     private Book book;
 
-    //@JsonBackReference
+    @JsonBackReference
     @JoinColumn
     @ManyToOne
     private Card card;

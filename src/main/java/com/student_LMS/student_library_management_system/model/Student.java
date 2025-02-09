@@ -107,6 +107,7 @@ package com.student_LMS.student_library_management_system.model;
 //    }
 //}
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -139,7 +140,7 @@ public class Student {
     @Column(name = "dob", nullable = false)
     private String dob;
 
-  //  @JsonManagedReference
+    @JsonManagedReference // it helps to stop same data printing again and again
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
     private Card card;
 

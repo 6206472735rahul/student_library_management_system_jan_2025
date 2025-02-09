@@ -78,6 +78,8 @@ package com.student_LMS.student_library_management_system.model;
 //    }
 //}
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.student_LMS.student_library_management_system.Enum.CardStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -108,16 +110,16 @@ public class Card {
     @Enumerated(value = EnumType.STRING)// this will convert enum value as string while storing in database
     private CardStatus cardStatus;
 
-   // @JsonBackReference
+    @JsonBackReference
     @OneToOne
     @JoinColumn // it joins the primary key of student table as foreign key in card table
     private Student student;
 
-    //@JsonManagedReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "card",cascade = CascadeType.ALL)
     private List<Book> bookList = new ArrayList<>();
 
-   // @JsonManagedReference
+   @JsonManagedReference
     @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
     private List<Transaction> transactionList = new ArrayList<>();
 

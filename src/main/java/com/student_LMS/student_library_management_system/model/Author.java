@@ -77,6 +77,7 @@ package com.student_LMS.student_library_management_system.model;
 //    }
 //}
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -106,7 +107,7 @@ public class Author {
     @Column(name="rating",nullable = false)
     private double rating;
 
-    //@JsonManagedReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Book> booksByAuthors=new ArrayList<>();
 
