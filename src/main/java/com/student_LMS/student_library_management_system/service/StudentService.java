@@ -165,4 +165,30 @@ public class StudentService {
         Page<Student> studentPage= studentRepository.findAll(PageRequest.of(pageNo,pageSize,Sort.by("name").ascending()));
         return studentPage.getContent();
     }
+    // here we write the logic for email
+    public Student findStudentByEmail(String email){
+      Student student=  studentRepository.findByEmail(email);
+      return student;
+    }
+    // here we write the logic for department
+    public List<Student> findStudentByDepartment(String dept){
+     List<Student> studentList=   studentRepository.findByDepartment(dept);
+     return studentList;
+
+    }
+    // here we write the logic for semester and department
+    public List<Student> findStudentBySemesterAndDepartment(String sem,String dept){
+        List<Student> studentList= studentRepository.findBySemesterAndDepartment(sem,dept);
+        return studentList;
+    }
+    // here we write the logic for semester or department
+    public List<Student> findStudentBySemesterorDepartment(String sem,String dept){
+        List<Student> studentList= studentRepository.findBySemesterAndDepartment(sem,dept);
+        return studentList;
+    }
+    // here we write the logic for sql query
+    public Student getEmailByQuery(String email){
+     Student student= studentRepository.getEmailByQuery(email);
+     return  student;
+    }
 }

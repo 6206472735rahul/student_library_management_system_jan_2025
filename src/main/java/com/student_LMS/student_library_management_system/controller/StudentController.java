@@ -82,6 +82,38 @@ public class StudentController {
      return studentPage;
 
     }
+    // here we write the api for email using getMapping
+    @GetMapping("/findByEmail")
+    public Student findStudentByEmail(@RequestParam String email){
+      Student student=  studentService.findStudentByEmail(email);
+      return student;
+
+    }
+    //here we write the api for department using getMapping
+    @GetMapping("/findByDepartment")
+    public List<Student>  findStudentByDepartment(@RequestParam String dept){
+       List<Student> studentList= studentService.findStudentByDepartment(dept);
+       return studentList;
+    }
+    // here we write the api for findStudentBySemesterAndDepartment using getMapping
+    @GetMapping("/findBySemesterAndDepartment")
+    public  List<Student> findStudentBySemesterAndDepartment(@RequestParam String sem,@RequestParam String dept){
+        List<Student> studentList= studentService.findStudentBySemesterAndDepartment(sem,dept);
+        return  studentList;
+    }
+    // here we write the api for findStudentBySemesterorDepartment using getMapping
+    @GetMapping("/findBySemesterOrDepartment")
+    public  List<Student> findStudentBySemesterOrDepartment(@RequestParam String sem,@RequestParam String dept){
+        List<Student> studentList= studentService.findStudentBySemesterAndDepartment(sem,dept);
+        return  studentList;
+    }
+    // here we write the api for sql query using getMapping
+    @GetMapping("/findEmailByQuery")
+    public Student getEmailByQuery(@RequestParam String email){
+      Student student=  studentService.getEmailByQuery(email);
+      return  student;
+
+    }
 
 
 }
