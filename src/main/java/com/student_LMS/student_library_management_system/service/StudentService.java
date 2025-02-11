@@ -59,9 +59,9 @@ public class StudentService {
         // first convert studentrequestdto into student object
         Student student = StudentConverter.convertStudentRequestDtoIntoStudent(studentRequestDto);
 
-//        if(student==null){
-//            throw new RuntimeException("student not saved");
-//        }
+          if(student==null){
+              throw new RuntimeException("student  not saved");
+          }
 
         //whenever the student are added card also issued/added at same time
         Card card = new Card();
@@ -77,6 +77,9 @@ public class StudentService {
     // here we write the logic of findStudentById
     public Student getStudentById(int id){
       Optional<Student> studentOptional= studentRepository.findById(id);
+      if(!studentOptional.isPresent()){
+          throw new RuntimeException("student with id not found");
+      }
       if(studentOptional.isPresent()){
           return studentOptional.get();
       }
@@ -87,6 +90,9 @@ public class StudentService {
     //here we write the logic to getAllStudent details
     public List<Student> getAllStudents(){
      List<Student> studentList= studentRepository.findAll();
+     if(studentList.isEmpty()){
+         throw  new RuntimeException("student not found");
+     }
      return studentList;
     }
     // here we write the logic of updateStudent

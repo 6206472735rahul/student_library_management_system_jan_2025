@@ -26,6 +26,7 @@ import com.student_LMS.student_library_management_system.requestdto.StudentReque
 import com.student_LMS.student_library_management_system.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,23 +38,48 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
     @PostMapping("/save")
-    public String saveStudent(@RequestBody StudentRequestDto studentRequestDto) {
-        String response = studentService.saveStudent(studentRequestDto);
-        return response;
+    public ResponseEntity<String> saveStudent(@RequestBody StudentRequestDto studentRequestDto) {
+        try {
+            String response = studentService.saveStudent(studentRequestDto);
+            // for return the data in standard entity we use
+            //ResponseEntity<String>, if you not aware of data type
+            // then return ResponseEntity<?>
+            return ResponseEntity.ok(response);
+            //ResponseEntity.ok it's return success message
+        }
+        catch (Exception e){
+         return   ResponseEntity.internalServerError().body("Exception occurred: "+e.getMessage());
+         //ResponseEntity.internalServerError().body it's return internal server error 500
+        }
+
 
     }
 
      // here we write the api for getStudentById using getMapping
     @GetMapping("/find/{id}")
-    public Student getStudentById(@PathVariable int id){
-      Student res=  studentService.getStudentById(id);
-      return res;
+    public ResponseEntity<?> getStudentById(@PathVariable int id){
+        try {
+            Student res=  studentService.getStudentById(id);
+            return ResponseEntity.ok(res);
+        }
+        catch (Exception e){
+            return ResponseEntity.internalServerError().body("Error occurred: "+ e.getMessage());
+
+        }
+
     }
     // here we write the api for getAllStudents using getMapping
     @GetMapping("/findAll")
-    public List<Student> getAllStudents(){
-     List<Student> studentList= studentService.getAllStudents();
-     return studentList;
+    public ResponseEntity<?> getAllStudents(){
+        try {
+            List<Student> studentList= studentService.getAllStudents();
+            return ResponseEntity.ok(studentList);
+        }
+        catch (Exception e){
+            return ResponseEntity.internalServerError().body("Error occurred"+ e.getMessage());
+
+        }
+
     }
     // here we write the api for updateStudent using putMapping
     @PutMapping("/update/{id}")
